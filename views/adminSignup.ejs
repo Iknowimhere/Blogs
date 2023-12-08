@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="form_container">
+      <h2>Sign up</h2>
+      <form action="/app/v1/admin/signup" class="form signup" method="post">
+        <div class="input_row">
+          <label for="email" class="input_label">Email</label>
+          <input type="email" class="input_control" id="email" name="email" />
+        </div>
+        <div class="input_row">
+          <label for="" class="input_label">Password</label>
+          <input type="password" class="input_control" name="password" />
+        </div>
+        <div class="input_row">
+          <label for="" class="input_label">Confirm Password</label>
+          <input type="password" class="input_control" name="confirmPassword" />
+        </div>
+        <span>Already registered?<a href="/app/v1/admin/login">Login</a></span>
+        <div class="btn_container">
+          <button type="submit">Submit</button>
+          <button type="reset">Clear</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

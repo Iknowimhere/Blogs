@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  min-height: 100vh;
+  max-width: 100vw;
+}
+.welcome_container {
+  max-width: 100vw;
+  min-height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)),
+    url(/images/leone-venter-VieM9BdZKFo-unsplash.jpg);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  & ul {
+    width: 300px;
+    height: 10vh;
+    /* margin: 20vh auto 0 auto; */
+    display: flex;
+    gap: 5em;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.welcome_container ul li {
+  list-style: none;
+  & a {
+    text-decoration: none;
+    padding: 10px 12px;
+    background-color: violet;
+    color: whitesmoke;
+    border-radius: 5px;
+  }
+}
+
+.form_container {
+  margin: 10vh auto 0 auto;
+  height: 40vh;
+  max-width: 40vw;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.input_row {
+  display: flex;
+  flex-direction: column;
+}
+.btn_container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1em;
+}
