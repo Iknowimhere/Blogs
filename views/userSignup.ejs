@@ -7,24 +7,44 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
+     <nav>
+      <ul>
+        <li><a href="/app/v1/users/signup">Signup</a></li>
+        <li><a href="/app/v1/users/login">Login</a></li>
+      </ul>
+    </nav>
     <div class="form_container">
       <h2>Sign up</h2>
-      <form action="" class="form signup">
+      <div class="error"></div>
+      <div class="success"></div>
+      <form action="/app/v1/users/signup" class="form signup" method="post">
         <div class="input_row">
-          <label for="" class="input_label">Username</label>
-          <input type="text" class="input_control" />
+          <label for="name" class="input_label">Username</label>
+          <input type="text" class="input_control" name="name" id="name" />
         </div>
         <div class="input_row">
-          <label for="" class="input_label">Email</label>
-          <input type="email" class="input_control" />
+          <label for="email" class="input_label">Email</label>
+          <input type="email" class="input_control" name="email" id="email" />
         </div>
         <div class="input_row">
-          <label for="" class="input_label">Password</label>
-          <input type="password" class="input_control" />
+          <label for="password" class="input_label">Password</label>
+          <input
+            type="password"
+            class="input_control"
+            name="password"
+            id="password"
+          />
         </div>
         <div class="input_row">
-          <label for="" class="input_label">Confirm Password</label>
-          <input type="password" class="input_control" />
+          <label for="confirmPassword" class="input_label"
+            >Confirm Password</label
+          >
+          <input
+            type="password"
+            class="input_control"
+            name="confirmPassword"
+            id="confirmPassword"
+          />
         </div>
         <span>Already registered?<a href="/app/v1/users/login">Login</a></span>
         <div class="btn_container">

@@ -7,16 +7,25 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
+    <nav>
+      <div class="back"></div>
+      <ul>
+        <li><a href="/app/v1/admin/signup">Signup</a></li>
+        <li><a href="/app/v1/admin/login">Login</a></li>
+      </ul>
+    </nav>
     <div class="form_container">
         <h2>Login</h2>
-      <form action="" class="form login">
+        <div class="error"></div>
+        <div class="success"></div>
+      <form action="/app/v1/admin/login" class="form login" method="post">
         <div class="input_row">
-          <label for="" class="input_label">Email</label>
-          <input type="email" class="input_control" />
+          <label for="email" class="input_label">Email</label>
+          <input type="email" class="input_control" name="email" id="email"/>
         </div>
         <div class="input_row">
-          <label for="" class="input_label">Password</label>
-          <input type="password" class="input_control" />
+          <label for="password" class="input_label">Password</label>
+          <input type="password" class="input_control" name="password"/>
         </div>
         <span
           >Didn't register yet?<a href="/app/v1/admin/signup">Sign up</a></span

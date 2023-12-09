@@ -9,6 +9,11 @@ const genToken = async (id) => {
 };
 const signupWrapper = (Model) => {
   return asyncErrorHandler(async (req, res, next) => {
+    console.log(req.body);
+    // if (!req.body.email || !req.body.password) {
+    //   let err = new CustomError(422, "please enter credentials");
+    //   return next(err);
+    // }
     const newUser = await Model.create(req.body);
     const token = await genToken(newUser._id);
     res.status(201).json({
@@ -24,8 +29,8 @@ const signupWrapper = (Model) => {
 const loginWrapper = (Model) => {
   return asyncErrorHandler(async (req, res, next) => {
     if (!req.body.email || !req.body.password) {
-      const err = new CustomError(400, "please enter credentials");
-      next(err);
+      let err = new CustomError(400, "please enter credentials");
+      return next(err);
     }
     const existingUser = await Model.findOne({ email: req.body.email });
     if (
@@ -39,7 +44,7 @@ const loginWrapper = (Model) => {
         400,
         `${existingUser.role} name and password incorrect`
       );
-      next(err);
+      return next(err);
     }
     const token = await genToken(existingUser._id);
     res.status(200).json({

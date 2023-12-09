@@ -1,25 +1,33 @@
 const CustomError = require("../utils/CustomError");
 
-const devError = (res, err) => {
-  res.status(err.statusCode).json({
-    status: err.status,
-    message: err.message,
-    error: err,
-    errorStack: err.stack,
-  });
+const devError = (req, res, err) => {
+  req.flash("error", err.message);
+  const referringPage = req.header("Referer") || "/app/v1/welcome";
+  res.redirect(referringPage);
+  // res.status(err.statusCode).json({
+  //   status: err.status,
+  //   message: err.message,
+  //   error: err,
+  //   errorStack: err.stack,
+  // });
 };
 
-const prodError = (res, err) => {
+const prodError = (req, res, err) => {
   if (err.isOperational === true) {
-    res.status(err.statusCode).json({
-      status: err.status,
-      message: err.message,
-    });
+    req.flash("error", err.message);
+    const referringPage = req.header("Referer") || "/app/v1/welcome";
+    res.redirect(referringPage);
+    // res.locals.error = err.message;
+    // res.status(err.statusCode).json({
+    //   status: err.status,
+    //   message: err.message,
+    // });
   } else {
-    res.status(err.statusCode).json({
-      status: "fail",
-      message: "something went wrong,Please try again later",
-    });
+    req.flash("error", "Something went wrong. Please try again later.");
+    // res.status(err.statusCode).json({
+    //   status: "fail",
+    //   message: "something went wrong,Please try again later",
+    // });
   }
 };
 
@@ -47,14 +55,17 @@ const handleTokenExpiredError = () => {
   return error;
 };
 const handleTokenError = () => {
-  let error = new CustomError(403, 'Something went wrong,Please login once again');
+  let error = new CustomError(
+    403,
+    "Something went wrong,Please login once again"
+  );
   return error;
 };
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
   if (process.env.NODE_ENV === "development") {
-    devError(res, err);
+    devError(req, res, err);
   }
 
   if (process.env.NODE_ENV === "production") {
@@ -68,11 +79,11 @@ module.exports = (err, req, res, next) => {
       err = handleCastError(err);
     }
     if (err.name === "TokenExpiredError") {
-      err=handleTokenExpiredError(err);
+      err = handleTokenExpiredError(err);
     }
-    if(err.name==="JsonWebTokenError"){
-    err=handleTokenError()
+    if (err.name === "JsonWebTokenError") {
+      err = handleTokenError();
     }
-    prodError(res, err);
+    prodError(req, res, err);
   }
 };
