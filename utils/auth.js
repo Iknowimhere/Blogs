@@ -10,12 +10,12 @@ const genToken = async (id) => {
 const signupWrapper = (Model) => {
   return asyncErrorHandler(async (req, res, next) => {
     console.log(req.body);
-    // if (!req.body.email || !req.body.password) {
-    //   let err = new CustomError(422, "please enter credentials");
-    //   return next(err);
-    // }
     const newUser = await Model.create(req.body);
     const token = await genToken(newUser._id);
+    res.cookie("jwt",token,{
+      httpOnly:true,
+      maxAge:24*60*60*1000
+    })
     res.status(201).json({
       status: "success",
       token,
@@ -47,6 +47,10 @@ const loginWrapper = (Model) => {
       return next(err);
     }
     const token = await genToken(existingUser._id);
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    });
     res.status(200).json({
       status: "success",
       token,

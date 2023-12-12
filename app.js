@@ -1,6 +1,7 @@
 const express = require("express");
 const authRouter = require("./routes/userRoutes");
 const flash = require("connect-flash");
+const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 const adminRouter = require("./routes/adminRoutes");
 const authorRouter = require("./routes/authorRoutes");
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
+app.use(cookieParser());
 app.get("/app/v1/welcome", (req, res) => {
   res.render("welcome");
 });
@@ -39,6 +41,8 @@ app.all("*", (req, res, next) => {
   let err = new CustomError(404, "page not found");
   next(err);
 });
+
+
 
 //global error handler
 app.use(globalErrorControllers);
