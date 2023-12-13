@@ -10,10 +10,14 @@ const getLogin = (req, res) => {
   res.render("authorLogin");
 };
 
-
+const logout = (req, res) => {
+  res.clearCookie("jwt");
+  res.redirect("/app/v1/author/login");
+};
 module.exports = {
   login,
   signup,
   getSignup,
-  getLogin
+  getLogin,
+  logout
 };

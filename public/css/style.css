@@ -11,8 +11,12 @@ nav{
   height: 75px;
   background-color: aqua;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
+  & div.back{
+    position: relative;
+    left: 2em;
+  }
   & ul{
     width: 200px;
     display: flex;

@@ -7,27 +7,28 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-     <nav>
+    <nav>
+      <div class="back"><a href="/app/v1/welcome">Home</a></div>
       <ul>
-        <li><a href="/app/v1/users/signup">Signup</a></li>
-        <li><a href="/app/v1/users/login">Login</a></li>
+        <li><a href="/app/v1/user/signup">Signup</a></li>
+        <li><a href="/app/v1/user/login">Login</a></li>
       </ul>
     </nav>
     <div class="form_container">
       <h2>Login</h2>
       <div class="error"></div>
       <div class="success"></div>
-      <form action="/app/v1/users/login" class="form login" method="post">
+      <form action="/app/v1/user/login" class="form login" method="post">
         <div class="input_row">
           <label for="email" class="input_label">Email</label>
-          <input type="email" class="input_control" name="email"/>
+          <input type="email" class="input_control" name="email" />
         </div>
         <div class="input_row">
           <label for="password" class="input_label">Password</label>
-          <input type="password" class="input_control"  name="password"/>
+          <input type="password" class="input_control" name="password" />
         </div>
         <span
-          >Didn't register yet?<a href="/app/v1/users/signup">Sign up</a></span
+          >Didn't register yet?<a href="/app/v1/user/signup">Sign up</a></span
         >
         <div class="btn_container">
           <button type="submit">Submit</button>
