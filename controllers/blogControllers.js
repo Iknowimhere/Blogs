@@ -8,7 +8,7 @@ const postBlog = asyncErrorHandler(async (req, res) => {
     title: req.body.title,
     snippet: req.body.snippet,
     description: req.body.description,
-    image: req.body.image,
+    image: req.file,
     author: user._id,
   });
   res.status(201).json({
@@ -40,19 +40,26 @@ const getBlogs = asyncErrorHandler(async (req, res) => {
   sort && sort.split(",").join(" ");
 
   const blogs = await Blog.find({ title: { $regex: search, $options: "i" } })
+    .populate("author")
     .skip(skip)
     .limit(limit)
     .sort(sort);
-
+  console.log(blogs);
   let totalBlogs = await Blog.countDocuments();
-  res.status(200).json({
-    status: "success",
+  // res.status(200).json({
+  //   status: "success",
+  //   page,
+  //   limit,
+  //   totalBlogs,
+  //   data: {
+  //     blogs,
+  //   },
+  // });
+  res.render("blogs", {
     page,
     limit,
     totalBlogs,
-    data: {
-      blogs,
-    },
+    blogs,
   });
 });
 
@@ -139,5 +146,5 @@ module.exports = {
   deleteBlog,
   postRating,
   getRatings,
-  dashboard
+  dashboard,
 };
