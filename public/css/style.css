@@ -82,7 +82,7 @@ nav {
   display: flex;
   flex-direction: column;
 }
-.input_row textarea{
+.input_row textarea {
   height: 5rem;
 }
 .btn_container {

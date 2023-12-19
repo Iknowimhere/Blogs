@@ -27,22 +27,62 @@
         <span>By:<%= doc.user.name%></span>
         <%})%>
       </div>
-      <div class="form_ratings">
+      <!-- <div class="form_ratings">
         <h2>Rate this blog</h2>
         <form action="/app/v1/blogs/ratings/<%= blog._id%>" method="post">
-          1<input type="radio" name="ratings" id="" value="1" /> 2<input
+          <input type="radio" name="ratings" id="" value="1" /> <input
             type="radio"
             name="ratings"
             id=""
             value="2"
           />
-          3<input type="radio" name="ratings" id="" value="3" /> 4<input
+          <input type="radio" name="ratings" id="" value="3" /> <input
             type="radio"
             name="ratings"
             id=""
             value="4"
           />
-          5<input type="radio" name="ratings" id="" value="5" />
+          <input type="radio" name="ratings" id="" value="5" />
+          <button type="submit">Submit Ratings</button>
+        </form>
+      </div> -->
+      <div class="rating">
+        <form action="/app/v1/blogs/ratings/<%= blog._id%>" method="post">
+          <input type="radio" id="star1" name="ratings" value="1" />
+          <label
+            class="star"
+            for="star1"
+            title="Bad"
+            aria-hidden="true"
+          ></label>
+          <input type="radio" id="star2" name="ratings" value="2" />
+          <label
+            class="star"
+            for="star2"
+            title="Good"
+            aria-hidden="true"
+          ></label>
+          <input type="radio" id="star3" name="ratings" value="3" />
+          <label
+            class="star"
+            for="star3"
+            title="Very good"
+            aria-hidden="true"
+          ></label>
+          <input type="radio" id="star4" name="ratings" value="4" />
+          <label
+            class="star"
+            for="star4"
+            title="Great"
+            aria-hidden="true"
+          ></label>
+          <input type="radio" id="star5" name="ratings" value="5" />
+          <label
+            class="star"
+            for="star5"
+            title="Awesome"
+            aria-hidden="true"
+          ></label>
           <button type="submit">Submit Ratings</button>
         </form>
       </div>

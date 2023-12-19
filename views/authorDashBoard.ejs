@@ -10,14 +10,18 @@
     <nav>
       <div class="back"><a href="/app/v1/blogs/dashboard">Home</a></div>
       <ul>
-        <li><a href="/app/v1/blogs/">Get Blogs</a></li>
+        <li><a href="/app/v1/blogs/author">My Blogs</a></li>
         <li><a href="/app/v1/author/logout">Logout</a></li>
       </ul>
     </nav>
     <main>
       <h1>Author Dash Board</h1>
       <div class="form_container">
-        <form action="/app/v1/blogs" method="post" enctype="multipart/form-data">
+        <form
+          action="/app/v1/blogs"
+          method="post"
+          enctype="multipart/form-data"
+        >
           <div class="input_row">
             <label for="title" class="input_label">Title</label>
             <input type="text" class="input_control" name="title" id="title" />
