@@ -5,7 +5,7 @@ const asyncErrorHandler = require("../utils/asyncErrorHandler");
 const getBlogsByAuthor = asyncErrorHandler(async (req, res) => {
   let author = req.user._id;
   let blogs = await Blog.find({ author: author }).populate("author");
-  return res.render("blogs", { blogs });
+  return res.render("blogsByAuthor", { blogs });
 });
 
 const postBlog = asyncErrorHandler(async (req, res) => {
@@ -24,6 +24,12 @@ const postBlog = asyncErrorHandler(async (req, res) => {
     },
   });
 });
+
+// const getBlogByAuthor = asyncErrorHandler(async (req, res) => {
+//   const { id } = req.params;
+//   const blog = await Blog.findById(id);
+//   res.render("blogByAuthor", { blog});
+// });
 
 const getBlog = asyncErrorHandler(async (req, res) => {
   const { id } = req.params;
@@ -65,18 +71,22 @@ const getBlogs = asyncErrorHandler(async (req, res) => {
   });
 });
 
+const getUpdateBlog=asyncErrorHandler(async(req,res)=>{
+  let id=req.params.id;
+  let blog=await Blog.findById(id)
+  res.render("updateBlog",{blog})
+})
+
 const updateBlog = asyncErrorHandler(async (req, res) => {
   const { id } = req.params;
-  const { title, description, snippet, image } = req.body;
+  // const { title, description, snippet } = req.body;
   if (req.user.role === "author") {
     const updatedBlog = await Blog.findOneAndUpdate(
       { _id: id },
       {
         $set: {
-          title: title,
-          snippet: snippet,
-          description: description,
-          image: image,
+          ...req.body,
+          image: req.file
         },
       },
       { new: true, runValidators: true }
@@ -137,5 +147,6 @@ module.exports = {
   deleteBlog,
   postRating,
   dashboard,
-  getBlogsByAuthor,
+  getUpdateBlog,
+  getBlogsByAuthor
 };

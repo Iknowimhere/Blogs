@@ -1,5 +1,6 @@
 const express = require("express");
 const authRouter = require("./routes/userRoutes");
+const methodOverride=require("method-override")
 const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.json());
+app.use(methodOverride("_method"))
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use(cookieParser());

@@ -10,6 +10,8 @@ const {
   postRating,
   dashboard,
   getBlogsByAuthor,
+  getBlogByAuthor,
+  getUpdateBlog,
 } = require("../controllers/blogControllers");
 const { auth, verifyRole } = require("../middlewares/authMiddleware");
 const upload = multer({ storage: storage });
@@ -29,9 +31,16 @@ router.post(
 );
 router.get("/", auth, getBlogs);
 router.get("/author", auth, verifyRole(["author"]), getBlogsByAuthor);
+router.get("/author/:id", auth, verifyRole(["author"]),getUpdateBlog);
 router.get("/:id", auth, getBlog);
-router.patch("/:id", auth, verifyRole(["author"]), updateBlog);
+router.patch(
+  "/author/:id",
+  auth,
+  verifyRole(["author"]),
+  upload.single("image"),
+  updateBlog
+);
 router.post("/ratings/:id", auth, verifyRole(["user"]), postRating);
-router.delete("/:id", auth, verifyRole(["admin", "author"]), deleteBlog);
+router.delete("/author/:id", auth, verifyRole(["admin", "author"]), deleteBlog);
 
 module.exports = router;
