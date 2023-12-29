@@ -1,11 +1,12 @@
 const express = require("express");
 const authRouter = require("./routes/userRoutes");
-const methodOverride=require("method-override")
+const methodOverride = require("method-override");
 const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 const adminRouter = require("./routes/adminRoutes");
 const authorRouter = require("./routes/authorRoutes");
+const paymentRouter = require("./routes/stripeRoutes");
 const blogRouter = require("./routes/BlogRoutes");
 const CustomError = require("./utils/CustomError");
 const globalErrorControllers = require("./controllers/globalErrorControllers");
@@ -26,7 +27,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.json());
-app.use(methodOverride("_method"))
+app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use(cookieParser());
@@ -38,13 +39,12 @@ app.use("/app/v1/user", authRouter);
 app.use("/app/v1/admin", adminRouter);
 app.use("/app/v1/author", authorRouter);
 app.use("/app/v1/blogs", blogRouter);
+app.use("/app/v1/payment", paymentRouter);
 
 app.all("*", (req, res, next) => {
   let err = new CustomError(404, "page not found");
   next(err);
 });
-
-
 
 //global error handler
 app.use(globalErrorControllers);

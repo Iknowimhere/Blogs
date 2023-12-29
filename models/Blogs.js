@@ -24,6 +24,11 @@ const blogSchema = new Schema({
     type: [""],
     default: "",
   },
+  price:{
+    type:Number,
+    default:0,
+    max:[200,"price cant exceed 200 rupees"]
+  }
 });
 
 module.exports = model("blog", blogSchema);

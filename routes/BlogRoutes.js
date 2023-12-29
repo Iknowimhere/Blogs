@@ -10,7 +10,6 @@ const {
   postRating,
   dashboard,
   getBlogsByAuthor,
-  getBlogByAuthor,
   getUpdateBlog,
 } = require("../controllers/blogControllers");
 const { auth, verifyRole } = require("../middlewares/authMiddleware");
@@ -31,9 +30,9 @@ router.post(
 );
 router.get("/", auth, getBlogs);
 router.get("/author", auth, verifyRole(["author"]), getBlogsByAuthor);
-router.get("/author/:id", auth, verifyRole(["author"]),getUpdateBlog);
+router.get("/author/:id", auth, verifyRole(["author"]), getUpdateBlog);
 router.get("/:id", auth, getBlog);
-router.patch(
+router.put(
   "/author/:id",
   auth,
   verifyRole(["author"]),
@@ -42,5 +41,6 @@ router.patch(
 );
 router.post("/ratings/:id", auth, verifyRole(["user"]), postRating);
 router.delete("/author/:id", auth, verifyRole(["admin", "author"]), deleteBlog);
+
 
 module.exports = router;

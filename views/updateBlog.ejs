@@ -18,7 +18,7 @@
       <h1>Update Blog</h1>
       <div class="form_container">
         <form
-          action="/app/v1/blogs/update/<%=blog._id%>?_method=PUT"
+          action="/app/v1/blogs/author/<%=blog._id%>?_method=PUT"
           method="post"
           enctype="multipart/form-data"
         >
@@ -74,7 +74,9 @@
           </div>
         </form>
         <div class="btn-collection">
-          <button type="submit">Delete</button>
+            <form action="/app/v1/blogs/author/<%= blog._id%>?_method=DELETE" method="post">
+                <button type="submit">Delete</button>
+            </form>
         </div>
       </div>
     </main>
